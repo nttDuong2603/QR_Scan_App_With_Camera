@@ -84,7 +84,7 @@ class LoginController{
   }
 
   // Future<bool> getAccount(String taiKhoan, String matKhau) async {
-  //   var url = 'http://192.168.19.180:5088/api/2A7368DFF9DE4EFB9B353522D0D0B262/$taiKhoan/$matKhau';
+  //   var url = 'http://115.78.237.91:5088/api/2A7368DFF9DE4EFB9B353522D0D0B262/$taiKhoan/$matKhau';
   //   try {
   //     final response = await http.get(Uri.parse(url));
   //
@@ -126,7 +126,7 @@ class LoginController{
   // Future<bool> checkLogin(String taiKhoan, String matKhau) async {
   //   // Thử kiểm tra trực tuyến trước
   //   try {
-  //     var url = 'http://192.168.19.180:5088/api/2A7368DFF9DE4EFB9B353522D0D0B262/$taiKhoan/$matKhau';
+  //     var url = 'http://115.78.237.91:5088/api/2A7368DFF9DE4EFB9B353522D0D0B262/$taiKhoan/$matKhau';
   //     final response = await http.get(Uri.parse(url));
   //
   //     if (response.statusCode == 200) {

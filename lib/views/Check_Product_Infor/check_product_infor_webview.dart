@@ -61,7 +61,7 @@ class _ProductInformationState extends State<ProductInformation> {
   late KeyEventChannel _keyEventChannel;
   bool _isScan = false;
   String IP ='https://demo-saas.mylanhosting.com';
-  // String IP ='http://192.168.19.180:2002';
+  // String IP ='http://115.78.237.91:2002';
 
 
   @override

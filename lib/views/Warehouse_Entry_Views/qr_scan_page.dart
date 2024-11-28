@@ -24,7 +24,7 @@ class _QrScanPageState extends State<QrScanPage> {
   bool _isScan = false;
   var getResult = '';
   late AudioPlayer _audioPlayer;
-  String IP = "http://192.168.19.180:2002";
+  String IP = "http://115.78.237.91:2002";
   // String IP = "https://admin-demo-saas.mylanhosting.com";
 
   @override

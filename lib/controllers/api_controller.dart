@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/user_online_model.dart';
 
 class APIController{
-  String IP = "http://192.168.19.180:2002";
+  String IP = "http://115.78.237.91:2002";
   // String IP = "https://admin-demo-saas.mylanhosting.com";
 
 
