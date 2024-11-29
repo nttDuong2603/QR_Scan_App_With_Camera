@@ -2,14 +2,16 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import '../models/user_online_model.dart';
+import '../utils/app_config.dart';
 
 class APIController{
-  String IP = "http://192.168.19.180:2002";
+  // String IP = "http://192.168.19.180:2002";
   // String IP = "https://admin-demo-saas.mylanhosting.com";
+  // String IP = "http://115.78.237.91:2002";
 
 
   Future<String?> FetchWarehouseReceivingDetail(String qrCode) async{
-    final String apiUrl = "$IP/api/B82D2154A88C45748705CB497E73D064/$qrCode";
+    final String apiUrl = "${AppConfig.IP}/api/B82D2154A88C45748705CB497E73D064/$qrCode";
     print(apiUrl);
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -27,7 +29,7 @@ class APIController{
   }
 
   Future<String?> FetchListOfImportedProducts(String qrCode) async{
-    final String apiUrl = "$IP/api/5901FADBB48346BDBF924301E0D12D3C/$qrCode";
+    final String apiUrl = "${AppConfig.IP}/api/5901FADBB48346BDBF924301E0D12D3C/$qrCode";
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -44,7 +46,7 @@ class APIController{
   }
 
   Future<String?> FetchSugguestWarehouseEntry(String PNK) async{
-    final String apiUrl = "$IP/api/location/stock-in/$PNK";
+    final String apiUrl = "${AppConfig.IP}/api/location/stock-in/$PNK";
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -61,7 +63,7 @@ class APIController{
   }
 
   Future<String?> FetchQRCodeInfo(String qrCode) async{
-    final String apiUrl = "$IP/api/70BCF5B68E594BE5919C2FE08C733324/$qrCode";
+    final String apiUrl = "${AppConfig.IP}/api/70BCF5B68E594BE5919C2FE08C733324/$qrCode";
     print(apiUrl);
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -79,7 +81,7 @@ class APIController{
   }
 
   Future<String?> FetchTrangThaiPNK(String PNK) async{
-    final String apiUrl = "$IP/api/2892DAEF248C40F1A2E9FDF2DE158069/$PNK";
+    final String apiUrl = "${AppConfig.IP}/api/2892DAEF248C40F1A2E9FDF2DE158069/$PNK";
     print(apiUrl);
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -98,7 +100,7 @@ class APIController{
 
 
   Future<Map<String, dynamic>?> fetchAccount(String taiKhoan, String matKhau) async {
-    final url = '$IP/api/2A7368DFF9DE4EFB9B353522D0D0B262/$taiKhoan/$matKhau';
+    final url = '${AppConfig.IP}/api/2A7368DFF9DE4EFB9B353522D0D0B262/$taiKhoan/$matKhau';
     try {
       final response = await http.get(Uri.parse(url));
 
@@ -136,7 +138,7 @@ class APIController{
   }
 
   Future<String?> updateQRCodeManagementTableAccordingToIndex(String LSXQR, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/9838AC8511C54712A63B2CDC654D4C10/$LSXQR';
+    final String apiUrl = '${AppConfig.IP}/api/9838AC8511C54712A63B2CDC654D4C10/$LSXQR';
     print('updateQRCodeManagementTableAccordingToIndex: $apiUrl');
     try {
       final response = await http.put(
@@ -158,7 +160,7 @@ class APIController{
   }
 
   Future<String?> capnhatThongTinTang(String maTang, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/AA5FB7A997834FDDAE5AEFEC183BF6BB/$maTang';
+    final String apiUrl = '${AppConfig.IP}/api/AA5FB7A997834FDDAE5AEFEC183BF6BB/$maTang';
     print('updateQRCodeManagementTableAccordingToIndex: $apiUrl');
     try {
       final response = await http.put(
@@ -180,7 +182,7 @@ class APIController{
   }
 
   Future<String?> updateQRCodeManagementTableAccordingToQrCode(String QRCode, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/F0A81F7818D64E029FDF52508DAB2CAE/$QRCode';
+    final String apiUrl = '${AppConfig.IP}/api/F0A81F7818D64E029FDF52508DAB2CAE/$QRCode';
     print('updateQRCodeManagementTableAccordingToQrCode:$apiUrl');
 
     try {
@@ -203,7 +205,7 @@ class APIController{
   }
 
   Future<String?> updateBoxInfor(String boxCode, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/0F3B9A89B7CE4486B2FBCD86B4CE5384/$boxCode';
+    final String apiUrl = '${AppConfig.IP}/api/0F3B9A89B7CE4486B2FBCD86B4CE5384/$boxCode';
     print('updateQRCodeManagementTableAccordingToQrCode:$apiUrl');
 
     try {
@@ -226,7 +228,7 @@ class APIController{
   }
 
   Future<String?> postWarehouseEntryInfor(Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/B0822BC9009A47F2B4A1EC62513BF48B/';
+    final String apiUrl = '${AppConfig.IP}/api/B0822BC9009A47F2B4A1EC62513BF48B/';
     print('postWarehouseEntryInfor:$apiUrl');
     try {
       final response = await http.post(
@@ -248,7 +250,7 @@ class APIController{
   }
 
   Future<String?> updateBoxQRCode(String MPNK, String MLNK, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/B0822BC9009A47F2B4A1EC62513BF48B/$MPNK/$MLNK';
+    final String apiUrl = '${AppConfig.IP}/api/B0822BC9009A47F2B4A1EC62513BF48B/$MPNK/$MLNK';
 
     try {
       final response = await http.put(
@@ -270,7 +272,7 @@ class APIController{
   }
 
   Future<String?> updateProductInfor(String MPNK, String MLNK, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/B0822BC9009A47F2B4A1EC62513BF48B/$MPNK/$MLNK';
+    final String apiUrl = '${AppConfig.IP}/api/B0822BC9009A47F2B4A1EC62513BF48B/$MPNK/$MLNK';
 
     try {
       final response = await http.put(
@@ -292,7 +294,7 @@ class APIController{
   }
 
   Future<String?> updateWarehouseEntry(String MPNK, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/6FD069511B084E108DB98E1726636C63/$MPNK/';
+    final String apiUrl = '${AppConfig.IP}/api/6FD069511B084E108DB98E1726636C63/$MPNK/';
 
     try {
       final response = await http.put(
@@ -314,7 +316,7 @@ class APIController{
   }
 
   Future<String?> postWarehouseEntryDetails(Map<String, dynamic> requestBody) async {
-    final String apiUrl = "$IP/api/934EE8610F5046DFAC6F2F46B7F31D21/";
+    final String apiUrl = "${AppConfig.IP}/api/934EE8610F5046DFAC6F2F46B7F31D21/";
 
     try {
       final response = await http.post(
@@ -338,7 +340,7 @@ class APIController{
 
   //.......................//Xuất kho//.............................//
   Future<String?> FetchLXHWithPXK(String qrCodePXK) async{
-    final String apiUrl = "$IP/api/F4241F1E01CA448E997455B99D8FFD2E/$qrCodePXK";
+    final String apiUrl = "${AppConfig.IP}/api/F4241F1E01CA448E997455B99D8FFD2E/$qrCodePXK";
     print(apiUrl);
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -356,7 +358,7 @@ class APIController{
   }
 
   Future<String?> FetchProductListWithPXK(String qrCodePXK, Map<String, dynamic> requestBody) async{
-    final String apiUrl = "$IP/api/BCFAE70D21B245CF8DEF53E3043B7F11/$qrCodePXK";
+    final String apiUrl = "${AppConfig.IP}/api/BCFAE70D21B245CF8DEF53E3043B7F11/$qrCodePXK";
     print(apiUrl);
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -374,7 +376,7 @@ class APIController{
   }
 
   Future<String?> FetchSugguestWarehouseRelease(String PXK) async{
-    final String apiUrl = "$IP/api/location/stock-out/$PXK";
+    final String apiUrl = "${AppConfig.IP}/api/location/stock-out/$PXK";
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -391,7 +393,7 @@ class APIController{
   }
 //1 lấy thoông tin Qr code
   Future<String?> FetchThongTinQRCode(String qrCode, Map<String, dynamic> requestBody) async{
-    final String apiUrl = "$IP/api/70BCF5B68E594BE5919C2FE08C733324/$qrCode";
+    final String apiUrl = "${AppConfig.IP}/api/70BCF5B68E594BE5919C2FE08C733324/$qrCode";
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -408,7 +410,7 @@ class APIController{
   }
 //2 Lấy danh sách QR code thuộc thùng
   Future<String?> FetchThongTinQRCodeThuocThung(String loaiQRCode, String maThung, Map<String, dynamic> requestBody) async{
-    final String apiUrl = "$IP/api/359AE2C42D7648939077B593BFF4C428/$loaiQRCode/$maThung";
+    final String apiUrl = "${AppConfig.IP}/api/359AE2C42D7648939077B593BFF4C428/$loaiQRCode/$maThung";
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -425,7 +427,7 @@ class APIController{
   }
 
   Future<String?> FetchTrangThaiPXK(String PXK) async{
-    final String apiUrl = "$IP/api/ECD9727952DF49458E6F733220FBE4C0/$PXK";
+    final String apiUrl = "${AppConfig.IP}/api/ECD9727952DF49458E6F733220FBE4C0/$PXK";
     print(apiUrl);
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -443,7 +445,7 @@ class APIController{
   }
 //3 Thêm thông tin phiếu xuất kho
   Future<String?> postThongTinPXK( Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/F705B6F6266C46C7AD9046B6DCF4B95E/';
+    final String apiUrl = '${AppConfig.IP}/api/F705B6F6266C46C7AD9046B6DCF4B95E/';
     print('postThongTinPXK: $apiUrl');
 
     try {
@@ -466,7 +468,7 @@ class APIController{
   }
 //4 Cập nhật thông tin thùng
   Future<String?> updateThongTinThung(String maThung, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/0F3B9A89B7CE4486B2FBCD86B4CE5384/$maThung';
+    final String apiUrl = '${AppConfig.IP}/api/0F3B9A89B7CE4486B2FBCD86B4CE5384/$maThung';
     print('updateThongTinThung: $apiUrl');
 
     try {
@@ -489,7 +491,7 @@ class APIController{
   }
 //5 cập nhật thông tin tầng
   Future<String?> updateThongTinTang(String maTang, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/AA5FB7A997834FDDAE5AEFEC183BF6BB/$maTang';
+    final String apiUrl = '${AppConfig.IP}/api/AA5FB7A997834FDDAE5AEFEC183BF6BB/$maTang';
     print('updateThongTinTang: $apiUrl');
 
     try {
@@ -513,7 +515,7 @@ class APIController{
 
   //6 Cập nhật qr code thùng
   Future<String?> updateThongTinQrCodeThung(String maThung, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/F0A81F7818D64E029FDF52508DAB2CAE/$maThung';
+    final String apiUrl = '${AppConfig.IP}/api/F0A81F7818D64E029FDF52508DAB2CAE/$maThung';
     print('updateThongTinQrCodeThung: $apiUrl');
     try {
       final response = await http.put(
@@ -535,7 +537,7 @@ class APIController{
   }
 //6 Cập nhật qr code sản phẩm
   Future<String?> updateThongTinQrCodeSanPham(String maThung, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/9838AC8511C54712A63B2CDC654D4C10/$maThung';
+    final String apiUrl = '${AppConfig.IP}/api/9838AC8511C54712A63B2CDC654D4C10/$maThung';
     print('updateThongTinQrCodeSanPham: $apiUrl');
 
     try {
@@ -558,7 +560,7 @@ class APIController{
   }
 
   Future<String?> capNhatTrangThaiPXK(String maPXK, Map<String, dynamic> requestBody) async {
-    final String apiUrl = '$IP/api/1AF9EEB83D2C4C82B2B24946A3F7ECF6/$maPXK';
+    final String apiUrl = '${AppConfig.IP}/api/1AF9EEB83D2C4C82B2B24946A3F7ECF6/$maPXK';
     print('capNhatTrangThaiPXK: $apiUrl');
 
     try {

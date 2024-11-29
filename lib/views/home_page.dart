@@ -116,14 +116,14 @@ Future<void> loadMaQuyen() async {
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: screenWidth*0.06),
-                                        child: Icon(
-                                          Icons.arrow_forward,
-                                          color: Colors.white,
-                                          size: screenWidth * 0.087,
-                                        ),
-                                      )
+                                      // Padding(
+                                      //   padding: EdgeInsets.only(left: screenWidth*0.06),
+                                      //   child: Icon(
+                                      //     Icons.arrow_forward,
+                                      //     color: Colors.white,
+                                      //     size: screenWidth * 0.087,
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                 )
@@ -166,14 +166,14 @@ Future<void> loadMaQuyen() async {
                                           fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.center,
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: screenWidth*0.06),
-                                      child: Icon(
-                                        Icons.arrow_forward,
-                                        color: Colors.white,
-                                        size: screenWidth * 0.087,
-                                      ),
-                                    )
+                                    // Padding(
+                                    //   padding: EdgeInsets.only(left: screenWidth*0.06),
+                                    //   child: Icon(
+                                    //     Icons.arrow_forward,
+                                    //     color: Colors.white,
+                                    //     size: screenWidth * 0.087,
+                                    //   ),
+                                    // )
                                   ],
                                 ),
                               )
@@ -265,14 +265,14 @@ Future<void> loadMaQuyen() async {
                                           fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.center,
                                     ),
-                                       Padding(
-                                         padding: EdgeInsets.only(left: screenWidth*0.06),
-                                         child: Icon(
-                                           Icons.arrow_forward,
-                                           color: Colors.white,
-                                           size: screenWidth * 0.087,
-                                         ),
-                                       )
+                                       // Padding(
+                                       //   padding: EdgeInsets.only(left: screenWidth*0.06),
+                                       //   child: Icon(
+                                       //     Icons.arrow_forward,
+                                       //     color: Colors.white,
+                                       //     size: screenWidth * 0.087,
+                                       //   ),
+                                       // )
                                   ],
                                 ),
                               )

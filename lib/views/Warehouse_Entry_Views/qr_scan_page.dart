@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-// import '../controllers/barcode_scan_controller.dart';
-// import 'package:rfid_c72_plugin_example/utils/key_event_channel.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-
+import '../../controllers/barcode_scanner_in_phone_controller.dart';
+import '../../widgets/qrcode_confirmation_dialog.dart';
 import '../../utils/appcolors.dart';
 
 class QrScanPage extends StatefulWidget {
@@ -17,24 +15,13 @@ class QrScanPage extends StatefulWidget {
 }
 
 class _QrScanPageState extends State<QrScanPage> {
-  // final ScanBarcodeController _barcodeController = ScanBarcodeController();
-  String? scannedCode;
-  // final ScanBarcodeController _controller = ScanBarcodeController();
-  // late KeyEventChannel _keyEventChannel;
-  bool _isScan = false;
+  BarcodeScannerInPhoneController _barcodeScannerInPhoneController = BarcodeScannerInPhoneController();
   var getResult = '';
   late AudioPlayer _audioPlayer;
-  String IP = "http://192.168.19.180:2002";
-  // String IP = "https://admin-demo-saas.mylanhosting.com";
 
   @override
   void initState() {
     super.initState();
-    // _controller.initPlatformState(_updateConnectionStatus, _handleScannedTags);
-    // _keyEventChannel = KeyEventChannel(
-    //   onKeyReceived: () => _controller.toggleBarcodeScanning(() => setState(() {})),
-    // );
-    // _keyEventChannel.initialize();
     _audioPlayer = AudioPlayer();
 
   }
@@ -48,62 +35,25 @@ class _QrScanPageState extends State<QrScanPage> {
     }
   }
 
-  // Future<void> _initializeScanner() async {
-  //   await _barcodeController.initPlatformState(
-  //     _updateConnectionStatus,
-  //     _handleScannedTags,
-  //   );
-  //   _barcodeController.toggleBarcodeScanning(() => setState(() {}));
-  // }
-
-  // void _updateConnectionStatus(dynamic isConnected) {
-  //   setState(() {
-  //     _barcodeController.updateConnectionStatus(isConnected);
-  //   });
-  // }
-
-  // Trích xuất mã từ URL
-  String? extractCodeFromUrl(String url) {
-    try {
-      // Kiểm tra xem URL có chứa "check/" không
-      if (url.contains("check/")) {
-        // Tìm vị trí của "check/" trong URL
-        int startIndex = url.indexOf("check/") + "check/".length;
-        // Tìm vị trí của "?" (nếu có) để lấy phần mã từ sau "check/" đến trước "?" hoặc đến cuối URL
-        int endIndex = url.contains("?") ? url.indexOf("?") : url.length;
-        // Trích xuất mã sản phẩm
-        return url.substring(startIndex, endIndex);
-      }
-    } catch (e) {
-      print("Lỗi khi phân tích URL: $e");
-    }
-    return null;
-  }
-
   void scanQRCode() async {
-    try {
-      // Quét mã QR và nhận kết quả
-      final code = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'Cancel', true, ScanMode.BARCODE);
-
-      // Kiểm tra nếu mã quét được là URL hợp lệ và có chứa "check/"
-      if ((code.startsWith('http://') || code.startsWith('https://')) && code.contains("check/")) {
-        // Trích xuất mã sản phẩm từ URL
-        String? extractedCode = extractCodeFromUrl(code);
+    // Gọi phương thức quét mã QR từ BarcodeScannerInPhoneController
+    String? code = await _barcodeScannerInPhoneController.scanQRCode();
+    if (code != null) {
+      print("Mã QR code quét được: $code");
+      // Kiểm tra xem có phải URL chứa "check/"
+      if (code.startsWith('http://') || code.startsWith('https://')) {
+        // Trích xuất mã từ URL
+        String? extractedCode = _barcodeScannerInPhoneController.extractCodeFromUrl(code);
         if (extractedCode != null) {
-          print("Mã QR code được quét từ URL: $extractedCode");
+          print("Mã sản phẩm trích xuất từ URL: $extractedCode");
           _updateUIWithQRCode(extractedCode);
         } else {
-          // Nếu không trích xuất được mã, có thể thông báo lỗi
           print("Không thể trích xuất mã từ URL");
         }
       } else {
-        // Nếu không phải URL, lấy nguyên chuỗi mã QR
-        print("Mã QR code được quét: $code");
+        // Cập nhật giao diện với mã QR nếu không phải URL
         _updateUIWithQRCode(code);
       }
-
-    } on PlatformException {
-      print("Lỗi khi quét mã QR");
     }
   }
 
@@ -119,125 +69,18 @@ class _QrScanPageState extends State<QrScanPage> {
 
     if (getResult != null) {
       _playScanSound();
-      bool confirmed = await _showQRCodeConfirmationDialog(getResult);
+      bool confirmed = await showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return QRCodeConfirmationDialog(qrCode: getResult);
+          });
+
       if (confirmed) {
         Navigator.pop(context, getResult); // Trả về mã QR đã quét
       }
     }
   }
-  // Future<void> _handleScannedTags(dynamic result) async {
-  //   if(_isScan){
-  //     return;
-  //   }else{
-  //     final code = await _barcodeController.updateTags(result);
-  //     if (code != null) {
-  //       _playScanSound();
-  //       setState(() {
-  //         scannedCode = code;
-  //       });
-  //       bool confirmed = await _showQRCodeConfirmationDialog(code);
-  //       if (confirmed) {
-  //         Navigator.pop(context, code); // Trả về mã QR đã quét
-  //       }
-  //     }
-  //   }
-  // }
 
-  // Hiển thị hộp thoại xác nhận mã QR
-  Future<bool> _showQRCodeConfirmationDialog(String qrCode) async {
-    _isScan= true;
-    return await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Xác nhận mã QR",
-            style: TextStyle(
-              color: AppColor.mainText,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          content: RichText(
-            text: TextSpan(
-                children: [
-                  TextSpan(
-                      text: ("Bạn có muốn sử dụng mã QR này: \n"),
-                      style: TextStyle(
-                        color: AppColor.mainText,
-                        fontSize: 18,
-                      )
-                  ),
-                  TextSpan(
-                      text: ("$qrCode?"),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.mainText,
-                        fontSize: 18,
-                      )
-                  )
-                ]
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                      backgroundColor: AppColor.borderInputColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      )
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                      setState(() {
-                        _isScan = false;
-                      });
-                    },
-                  child: Text("Hủy",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-                SizedBox(width: 30),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      backgroundColor: AppColor.borderInputColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      )
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                    setState(() {
-                      _isScan = false;
-                    });
-                  },
-                  child: Text("OK",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        );
-      },
-    ) ?? false;
-  }
-
-  // @override
-  // void dispose() {
-  //   _barcodeController.barcodeSubscription?.cancel();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -286,8 +129,8 @@ class _QrScanPageState extends State<QrScanPage> {
       ),
       body: Center(
         child: Text(
-          scannedCode != null
-              ? "Mã đã quét: $scannedCode"
+          getResult != null
+              ? "Mã đã quét: $getResult"
               : "Vui lòng quét QR code",
           style: TextStyle(fontSize: 22, color: Colors.grey),
         ),

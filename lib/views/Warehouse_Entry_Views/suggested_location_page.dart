@@ -183,36 +183,6 @@ class _SuggestedLocationPageState extends State<SuggestedLocationPage> {
     }
   }
 
-  // Future<void> _handleScannedTags(dynamic result) async {
-  //   if(_isScan){
-  //     return;
-  //   }else{
-  //     final code = await _barcodeController.updateTags(result);
-  //     if (code != null) {
-  //       _playScanSound();
-  //       setState(() {
-  //         scannedCode = code;
-  //       });
-  //       bool confirmed = await _showQRCodeConfirmationDialog(code);
-  //       if (confirmed) {
-  //         Navigator.pop(context, code); // Trả về mã QR đã quét để so sánh
-  //       }
-  //     }
-  //   }
-  //
-  // }
-  // Future<void> _loadEntriesSyncFromSharedPreferences() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   List<String> orderList = prefs.getStringList('deletedWarehouseEntries') ?? [];
-  //   setState(() {
-  //     syncItems = orderList
-  //         .map((order) => json.decode(order))
-  //         .where((item) => item['status'] == "Đã đồng bộ") // Lọc chỉ mục có status là "Đã đồng bộ"
-  //         .toList()
-  //         .cast<Map<String, dynamic>>();
-  //     _sortItemsByDistance(); // Sắp xếp các mục theo khoảng cách
-  //   });
-  // }
 
   void _toggleExpansion(int index) {
     setState(() {
