@@ -24,7 +24,7 @@ class _WarehouseEntryDetailsPageState extends State<WarehouseEntryDetailsPage> {
   String? LSXQR;
   String boxCode = '';
   bool _isSync = false;
-  String IP = "http://192.168.19.180:2002";
+  String IP = "http://115.78.237.91:2002";
   // String IP = "https://admin-demo-saas.mylanhosting.com";
 
   Future<void> _navigateToQrScan(BuildContext context, String scanTitle, ValueSetter<String?> onScanned) async {

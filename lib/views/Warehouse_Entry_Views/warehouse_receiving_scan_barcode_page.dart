@@ -35,7 +35,7 @@ class _WarehouseReceivingScanBarcodePageState extends State<WarehouseReceivingSc
   int productTotal = 0;
   late AudioPlayer _audioPlayer;
   var getResult = '';
-  String IP = "http://192.168.19.180:2002";
+  String IP = "http://115.78.237.91:2002";
   // String IP = "https://admin-demo-saas.mylanhosting.com";
 
 

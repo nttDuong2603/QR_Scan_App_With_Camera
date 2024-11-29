@@ -22,7 +22,7 @@ class _WarehouseEntryInforPageState extends State<WarehouseEntryInforPage> {
   final AppFormat appFormat = AppFormat();
   final APIController _apiController = APIController();
   String trangThai = ''; // Lưu trạng thái với mã PNK làm khóa
-  String IP = "http://192.168.19.180:2002";
+  String IP = "http://115.78.237.91:2002";
   // String IP = "https://admin-demo-saas.mylanhosting.com";
 
   @override
